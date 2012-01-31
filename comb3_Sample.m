@@ -1,23 +1,30 @@
-clr;
+clr; %clear all function
 
+%get in file name
 in_file = uigetfile ('.wav','Select a Wave File to Input');
+%set out file name
 out_file = ['output cb ' in_file];
 
+%pass file names to physdo-stream function
 signal = streamio(in_file, out_file);
 
 dly = 1000;   %delay
 g = 0.9;    %gain
 
+%creates bufffer
 buffer = zeros(dly,1);
-y = 0;
 
 while true
+    %prevents clipping
     x = 0.5* signal.input();
-    y=y+1;
     if isfinite(x)
+        %put sample in buffer
         buffer(1) = x;
+        %add delayed signal
         x = x + g*buffer(dly);
+        %move the buffer up by one to make space for next sample
         buffer(2:dly) = buffer(1:dly-1); 
+        %output sample
         signal.output(x);
         
     else
