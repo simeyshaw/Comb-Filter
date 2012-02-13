@@ -15,9 +15,9 @@ dly_no = length(dly);
 max_dly = max(dly);
 
 routing_matrix = [
-1, 1, 1;
-1, 1, 1;
-1, 1, 1;
+-1, 1, 1;
+1, 0, 1;
+0, 1, -1;
 ];
 
 dly_array = zeros(max_dly,dly_no);
@@ -47,7 +47,7 @@ while true
         
         %move the delay lines up by 1 sample
         for d = 1:dly_no
-            dly_array(2:dly(d)) = dly_array(1:dly(d)-1);
+            dly_array(2:dly(d),d) = dly_array(1:dly(d)-1,d);
         end
         
         %To Do - insert filter here
@@ -75,7 +75,7 @@ while true
             
             %move the delay lines up by 1 sample
             for d = 1:dly_no
-                dly_array(2:dly(d)) = dly_array(1:dly(d)-1);
+                dly_array(2:dly(d),d) = dly_array(1:dly(d)-1,d);
             end
 
             %To Do - insert filter here

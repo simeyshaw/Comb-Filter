@@ -15,16 +15,16 @@ dly_no = length(dly);
 max_dly = max(dly);
 
 routing_matrix = [
-1, 1, 1;
-1, 1, 1;
-1, 1, 1;
+-1, 1, 1;
+1, 0, 1;
+0, 1, -1;
 ];
 
 dly_array = zeros(max_dly,dly_no);
 
 g_in = [0.5,0.4,0.3];
 g_out =[0.25,0.25,0.25];
-g_fb = [0.5,0.5,0.5];
+g_fb = [0.4,0.4,0.4];
 g_ft = 0.5;
 
 while true
@@ -92,7 +92,6 @@ while true
     
     
 end
-
+h = msgbox('Finished Processing','help');
 play(in_file,out_file);
 
-h = msgbox('Finished Processing','help');
